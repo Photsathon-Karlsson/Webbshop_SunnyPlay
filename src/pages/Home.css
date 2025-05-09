@@ -1,0 +1,82 @@
+/* src/pages/Home.css */
+.home-container {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .home-header {
+    background-color: #A2D2FF;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .logo-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    width: 60px;
+    height: auto;
+  }
+  
+  .navbar-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .navbar-row a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .intro-text {
+    text-align: center;
+    margin: 2rem 0 1rem;
+  }
+  
+  .toys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .toy-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .toy-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .add-to-cart {
+    background-color: #FF865E;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #FEE440;
+    color: black;
+  }
+  

@@ -1,0 +1,77 @@
+.home-header {
+    background-color: #A2D2FF;
+    margin: 0;
+    text-align: center;
+    width: 100vw;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-top: 1rem;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .top-nav {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .admin-button {
+    order: 1;
+  }
+  
+  .cart-button {
+    position: relative;
+    order: 2;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  .logo-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  
+  .logo {
+    width: 150px !important;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+  }
+  
+  .nav-icon:hover, .logo:hover {
+    transform: scale(1.1);
+  }
+  
