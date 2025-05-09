@@ -2,9 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// Firebase config from Firebase Console
 const firebaseConfig = {
-  apiKey: "AIzaSyAyQwqJShKbX7fx5vjB6H_y57IU-L05nUk",
+  apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
   authDomain: "toylist-3a2ab.firebaseapp.com",
   projectId: "toylist-3a2ab",
   storageBucket: "toylist-3a2ab.firebasestorage.app",
@@ -13,8 +12,10 @@ const firebaseConfig = {
   measurementId: "G-CXGSWF2GCG"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Export Firestore database
 export const db = getFirestore(app);
+
+
+
+
+
