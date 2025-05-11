@@ -58,9 +58,20 @@ const Cart = () => {
                   <p>{item.description}</p>
                   <p>Price: {item.price} kr</p>
                   <div className="cart-actions">
-                    <button onClick={() => removeFromCart(cartItems.findIndex(i => i.id === item.id))}>-</button>
+                    {/* Use images for + and - buttons */}
+                    <img
+                      src="/images/minus.png"  // minus button
+                      alt="minus"
+                      className="quantity-button-minus"
+                      onClick={() => removeFromCart(cartItems.findIndex(i => i.id === item.id))}
+                    />
                     <span>{item.quantity}</span>
-                    <button onClick={() => addToCart(item)}>+</button>
+                    <img
+                      src="/images/addition.png"  // addition button
+                      alt="plus"
+                      className="quantity-button-plus"
+                      onClick={() => addToCart(item)}
+                    />
                   </div>
                 </div>
               </li>
@@ -77,3 +88,4 @@ const Cart = () => {
 };
 
 export default Cart;
+

@@ -7,7 +7,7 @@ import App from "./App.jsx";
 
 // Import pages correctly
 import Home from "./pages/Home.jsx";
-import Cart from "./pages/Cart.jsx";        // ใช้อันนี้ ✅
+import Cart from "./pages/Cart.jsx";        
 import Login from "./pages/Login.jsx";
 import AdminEditor from "./pages/AdminEditor.jsx";
 

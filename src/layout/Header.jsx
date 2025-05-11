@@ -25,7 +25,7 @@ const Header = () => {
         <a href="/">
           <img src="/images/logo.png" alt="Sunny Play Logo" className="logo" />
         </a>
-        <h1>Welcome to Sunny Play Toy Shop!</h1>
+        <h1>Welcome to Sunny Play !</h1>
       </div>
     </header>
   );
