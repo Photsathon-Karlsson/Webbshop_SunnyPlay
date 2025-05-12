@@ -1,0 +1,141 @@
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    max-width: 300px;
+  }
+  
+  .search-input {
+    padding-right: 30px;
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    font-size: 1.2rem;
+    pointer-events: none;
+    color: #666;
+  }
+  
+  .sort-select {
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    max-width: 300px;
+  }
+  
+  .add-form {
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-form input {
+    display: block;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .add-form button {
+    background-color: #FF865E;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+  
+  .add-form button:hover {
+    background-color: #FEE440;
+    color: black;
+  }
+  
+  .product-list {
+    margin-top: 2rem;
+  }
+  
+  .product-item {
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .product-item p {
+    margin: 0;
+    font-size: 1rem;
+    flex-grow: 1;
+  }
+  
+  .product-item button {
+    margin-left: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .product-item button:first-of-type {
+    background-color: #ccc;
+    color: #000;
+  }
+  
+  .product-item button:last-of-type {
+    background-color: #FF865E;
+    color: white;
+  }
+  
+  .product-item button:last-of-type:hover {
+    background-color: #FEE440;
+    color: black;
+  }
+  
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  
