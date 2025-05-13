@@ -70,7 +70,7 @@ const AdminEditor = () => {
   const handleDeleteProduct = async (id) => {
     await deleteDoc(doc(db, "toys", id));
     console.log("Deleted product with ID:", id); // Check if removed product.
-    fetchProducts(); // Load new info afetr remove.
+    fetchProducts(); // Load new info after remove.
   };
 
   // Function to edit product item.
@@ -96,92 +96,105 @@ const AdminEditor = () => {
 
   return (
     <main>
+      {/* Heading */}
       <h1>Admin Editor</h1>
-      <p>Manage Products: Add, edit, or delete products in your store.</p>
+      {/* Subheading */}
+      <p className="subheading">Manage Products: Add, edit, or delete products in your store.</p>
 
-      {/* Search product */}
-      <div className="search-container">
-        <i className="search-icon">🔍</i>
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="search-input"
-        />
-      </div>
+      {/* Layout divided in two columns */}
+      <div className="editor-layout">
+        {/* Left column: search, sort, add product */}
+        <div className="editor-left">
+          {/* Search product */}
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="search-input"
+            />
+            <i className="search-icon">🔍</i>
+          </div>
 
-      {/* Sort product */}
-      <select value={sortOption} onChange={handleSortChange} className="sort-select">
-        <option value="">-- Sort By --</option>
-        <option value="price-low">Price: Low to High</option>
-        <option value="price-high">Price: High to Low</option>
-        <option value="name-asc">Name: A-Z</option>
-        <option value="name-desc">Name: Z-A</option>
-      </select>
+          {/* Sort product */}
+          <select value={sortOption} onChange={handleSortChange} className="sort-select">
+            <option value="">-- Sort By --</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name-asc">Name: A-Z</option>
+            <option value="name-desc">Name: Z-A</option>
+          </select>
 
-      {/* Add form */}
-      <div className="add-form">
-        <h2>Add new product</h2>
-        <input
-          type="text"
-          placeholder="Name"
-          value={newProduct.name}
-          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newProduct.description}
-          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={newProduct.price}
-          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="URL image"
-          value={newProduct.image}
-          onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-        />
-        <button onClick={editIndex !== null ? handleSaveProduct : handleAddProduct}>
-          {editIndex !== null ? "Save" : "Add Product"}
-        </button>
-      </div>
+          {/* Add form */}
+          <div className="add-form">
+            <h2>Add new product</h2>
+            <input
+              type="text"
+              placeholder="Name"
+              value={newProduct.name}
+              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newProduct.description}
+              onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="URL image"
+              value={newProduct.image}
+              onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+            />
+            <button onClick={editIndex !== null ? handleSaveProduct : handleAddProduct}>
+              {editIndex !== null ? "Save" : "Add Product"}
+            </button>
+          </div>
+        </div>
 
-      {/* Product list */}
-      <div className="product-list">
-        <h2>Product List</h2>
-        {products
-          .filter((product) =>
-            product.name?.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .sort((a, b) => {
-            if (sortOption === "price-low") return a.price - b.price;
-            if (sortOption === "price-high") return b.price - a.price;
-            if (sortOption === "name-asc") return a.name.localeCompare(b.name);
-            if (sortOption === "name-desc") return b.name.localeCompare(a.name);
-            return 0;
-          })
-          .map((product, index) => (
-            <div key={product.id} className="product-item">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <p>
-                <strong>{product.name}</strong> — {product.price} kr
-              </p>
-              {/* Button remove with trash icon */}
-              <button onClick={() => handleDeleteProduct(product.id)}>
-                <img src="/images/trash-can.png" alt="Remove" />
-              </button>
-              {/* Button edit with pen icon */}
-              <button onClick={() => handleEditProduct(index)}>
-                <img src="/images/pen.png" alt="Edit" />
-              </button>
+        {/* Right column: product list */}
+        <div className="editor-right">
+          {/* Product list container */}
+          <div className="product-list-container">
+            <h2>Product List</h2>
+            <div className="product-list">
+              {products
+                .filter((product) =>
+                  product.name?.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                .sort((a, b) => {
+                  if (sortOption === "price-low") return a.price - b.price;
+                  if (sortOption === "price-high") return b.price - a.price;
+                  if (sortOption === "name-asc") return a.name.localeCompare(b.name);
+                  if (sortOption === "name-desc") return b.name.localeCompare(a.name);
+                  return 0;
+                })
+                .map((product, index) => (
+                  <div key={product.id} className="product-item">
+                    <img src={product.image} alt={product.name} className="product-image" />
+                    <p>
+                      <strong>{product.name}</strong> — {product.price} kr
+                    </p>
+                    {/* Button remove with trash icon */}
+                    <button onClick={() => handleDeleteProduct(product.id)}>
+                      <img src="/images/trash-can.png" alt="Remove" />
+                    </button>
+                    {/* Button edit with pen icon */}
+                    <button onClick={() => handleEditProduct(index)}>
+                      <img src="/images/pen.png" alt="Edit" />
+                    </button>
+                  </div>
+                ))}
             </div>
-          ))}
+          </div>
+        </div>
       </div>
     </main>
   );
