@@ -1,4 +1,6 @@
-/* Center everything on the page */
+/* src/pages/AdminEditor.css */
+
+/* Global layout */
 body {
     display: flex;
     justify-content: center;
@@ -14,6 +16,7 @@ body {
     margin: 0 auto;
     font-family: sans-serif;
     width: 100%;
+    box-sizing: border-box;
   }
   
   h1 {
@@ -28,6 +31,7 @@ body {
     color: #444;
   }
   
+  /* Search and Sort */
   .search-container {
     position: relative;
     display: flex;
@@ -36,6 +40,7 @@ body {
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
   }
   
   .search-input {
@@ -45,6 +50,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
+    box-sizing: border-box;
   }
   
   .search-icon {
@@ -65,8 +71,10 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
   }
   
+  /* Add Form */
   .add-form {
     background: #f8f8f8;
     padding: 1rem;
@@ -78,11 +86,12 @@ body {
   .add-form input {
     display: block;
     margin-bottom: 0.75rem;
-    width: 98%;
+    width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
+    box-sizing: border-box;
   }
   
   .add-form button {
@@ -94,9 +103,10 @@ body {
     cursor: pointer;
     font-size: 1rem;
     transition: 0.3s;
-    width: 50%;
-    display: block;
+    width: 100%;
+    max-width: 300px;
     margin: 1rem auto;
+    display: block;
   }
   
   .add-form button:hover {
@@ -104,11 +114,13 @@ body {
     color: black;
   }
   
+  /* Product list */
   .product-list {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
   
   .product-item {
@@ -123,6 +135,7 @@ body {
     align-items: center;
     width: 100%;
     max-width: 500px;
+    box-sizing: border-box;
   }
   
   .product-item p {
@@ -151,5 +164,29 @@ body {
     object-fit: cover;
     border-radius: 6px;
     flex-shrink: 0;
+  }
+  
+  /* Responsive layout for smaller screens */
+  @media (max-width: 600px) {
+    .product-item {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+  
+    .product-item p {
+      text-align: center;
+    }
+  
+    .product-image {
+      margin-bottom: 0.5rem;
+    }
+  
+    .search-container,
+    .sort-select,
+    .add-form input,
+    .add-form button {
+      max-width: 100%;
+    }
   }
   
