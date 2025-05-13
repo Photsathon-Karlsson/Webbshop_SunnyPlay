@@ -1,7 +1,6 @@
 // Show items in cart + total price with quantity, checkout button, and receipt
 import { useState } from "react";
 import { useCart } from "../context/useCart";
-import "./Cart.css";
 
 const Cart = () => {
   const { cartItems, removeFromCart, addToCart, clearCart } = useCart();

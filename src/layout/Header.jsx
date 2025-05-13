@@ -1,4 +1,3 @@
-import "./Header.css";
 import { useCart } from "../context/useCart";
 
 const Header = () => {

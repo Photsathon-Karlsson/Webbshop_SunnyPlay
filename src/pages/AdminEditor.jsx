@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../data/database";
-import "./AdminEditor.css";
 
 // Get info from firestore collection 'toys'.
 // Keep info in state 'products'
