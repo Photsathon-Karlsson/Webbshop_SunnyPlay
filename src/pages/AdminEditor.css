@@ -1,8 +1,19 @@
-main {
+/* Center everything on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #FEF9EF;
+  }
+  
+  main {
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
     font-family: sans-serif;
+    width: 100%;
   }
   
   h1 {
@@ -23,6 +34,8 @@ main {
     align-items: center;
     margin-bottom: 1rem;
     max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .search-input {
@@ -49,6 +62,9 @@ main {
     border-radius: 6px;
     border: 1px solid #ccc;
     max-width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .add-form {
@@ -62,7 +78,7 @@ main {
   .add-form input {
     display: block;
     margin-bottom: 0.75rem;
-    width: 100%;
+    width: 98%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -78,6 +94,9 @@ main {
     cursor: pointer;
     font-size: 1rem;
     transition: 0.3s;
+    width: 50%;
+    display: block;
+    margin: 1rem auto;
   }
   
   .add-form button:hover {
@@ -87,53 +106,48 @@ main {
   
   .product-list {
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .product-item {
     background: #fff;
-    padding: 1rem;
+    padding: 0.75rem;
     border: 1px solid #eee;
     border-radius: 6px;
     margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 60px 1fr auto auto;
+    gap: 0.75rem;
     align-items: center;
-    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
   }
   
   .product-item p {
     margin: 0;
     font-size: 1rem;
-    flex-grow: 1;
+    text-align: left;
   }
   
   .product-item button {
-    margin-left: 0.5rem;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-    border-radius: 6px;
+    padding: 0;
+    background: none;
     border: none;
     cursor: pointer;
   }
   
-  .product-item button:first-of-type {
-    background-color: #ccc;
-    color: #000;
-  }
-  
-  .product-item button:last-of-type {
-    background-color: #FF865E;
-    color: white;
-  }
-  
-  .product-item button:last-of-type:hover {
-    background-color: #FEE440;
-    color: black;
+  .product-item button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
   }
   
   .product-image {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 6px;
     flex-shrink: 0;
