@@ -52,7 +52,7 @@
   
   .sort-container {
     width: 200px;
-    align-self: center;
+    align-self: flex-start;
   }
   
   .sort-select {
@@ -123,3 +123,10 @@
     color: black;
   }
   
+  @media (max-width: 386px) {
+
+    .search-sort-wrapper {
+        margin-right: 2.2em;
+    }
+
+  }

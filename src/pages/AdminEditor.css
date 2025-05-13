@@ -196,11 +196,18 @@ body {
   }
   
   /* Responsive layout */
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .editor-layout {
       flex-direction: column;
     }
   
+    .editor-left,
+    .editor-right {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 600px) {
     .product-item {
       grid-template-columns: 1fr;
       text-align: center;
@@ -218,8 +225,27 @@ body {
     .add-form button,
     .add-form input,
     .search-container,
-    .sort-select {
+    .sort-select,
+    .product-list-container,
+    .add-form {
       max-width: 100%;
+      width: 100%;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .search-container,
+    .sort-select {
+        margin: 10px;
+    }
+    
+    .product-item button {
+      justify-self: center;
+    }
+  
+    .editor-left,
+    .editor-right {
+      min-width: 320px;
     }
   }
   
