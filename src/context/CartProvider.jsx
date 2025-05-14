@@ -1,10 +1,8 @@
-// Keep cart info
-// src/context/CartContext.jsx
-import { createContext, useState, useEffect } from "react";
+// src/context/CartProvider.jsx
+import { useState, useEffect } from "react";
+import { CartContext } from "./CartContext";
 
-export const CartContext = createContext();
-
-export const CartProvider = ({ children }) => {
+const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -31,4 +29,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-
+export default CartProvider;

@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/database";
-import { useCart } from "../context/useCart";
+import useCart from "../components/useCart";
 
 const Home = () => {
   const [toys, setToys] = useState([]); // List of toys from Firebase

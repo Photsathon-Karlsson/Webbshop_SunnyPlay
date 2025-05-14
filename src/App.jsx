@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "./layout/Header";
-import { CartProvider } from "./context/CartContext";
+import Header from "./components/Header";
+import CartProvider from "./context/CartProvider";
 
 function App() {
   return (
