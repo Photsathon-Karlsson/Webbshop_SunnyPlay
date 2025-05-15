@@ -76,25 +76,24 @@ const AdminEditor = () => {
   };
 
   // Function to edit product item.
-  const handleEditProduct = (index) => { // index: the position of the clicked product.
-    setEditIndex(index); // Marks which product is being edited.
-    setNewProduct(products[index]); // Loads the selected product’s data into the form.
-    console.log("Editing product:", products[index]);//🔍
+  const handleEditProduct = (id) => {
+    const productToEdit = products.find((p) => p.id === id);
+    setEditIndex(id);
+    setNewProduct(productToEdit);
+    console.log("Editing product:", productToEdit);
   };
 
   // Function for recording product edits when the user clicks the “Edit” button and changes data in the form.
-  const handleSaveProduct = async () => { // Create an async function named handleSaveProduct & can use await inside it.
-    const editingProduct = products[editIndex]; // Gets the product to edit from the products array using editIndex.
-    const productRef = doc(db, "toys", editingProduct.id); // Reference the 'toys' document by editingProduct.id. 
-    // Update Firestore with newProduct data, converting price to a number using Number(newProduct.price) before saving.
+  const handleSaveProduct = async () => {
+    const productRef = doc(db, "toys", editIndex);
     await updateDoc(productRef, {
       ...newProduct,
       price: Number(newProduct.price),
     });
-    console.log("Updated product:", editingProduct.id); // Check if uploaded product.
-    setEditIndex(null); // Set editIndex to null to stop editing any item.
-    setNewProduct({ name: "", description: "", price: "", image: "" }); // Clear the newProduct form for the next add or edit.
-    fetchProducts(); // Using fetchProducts() to reload updated products.
+    console.log("Updated product:", editIndex);
+    setEditIndex(null);
+    setNewProduct({ name: "", description: "", price: "", image: "" });
+    fetchProducts();
   };
 
   return (
@@ -178,7 +177,7 @@ const AdminEditor = () => {
                   if (sortOption === "name-desc") return b.name.localeCompare(a.name);
                   return 0;
                 })
-                .map((product, index) => (
+                .map((product) => (
                   <div key={product.id} className="product-item">
                     <img src={product.image} alt={product.name} className="product-image" />
                     <p>
@@ -189,7 +188,7 @@ const AdminEditor = () => {
                       <img src="src/assets/trash-can.png" alt="Remove" />
                     </button>
                     {/* Button edit with pen icon */}
-                    <button onClick={() => handleEditProduct(index)}>
+                    <button onClick={() => handleEditProduct(product.id)}>
                       <img src="src/assets/pen.png" alt="Edit" />
                     </button>
                   </div>
