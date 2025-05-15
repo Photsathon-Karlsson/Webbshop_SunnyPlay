@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Webbshop_SunnyPlay/'  
+  base: '',
+  //base: '/Webbshop_SunnyPlay/'  
 })
 
 
