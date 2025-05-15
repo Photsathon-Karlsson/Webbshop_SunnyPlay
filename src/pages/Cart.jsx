@@ -66,14 +66,14 @@ const Cart = () => {
                   <div className="cart-actions">
                     {/* Use images for + and - buttons */}
                     <img
-                      src="/images/minus.png"  // minus button
+                      src="src/assets/minus.png"  // minus button
                       alt="minus"
                       className="quantity-button-minus"
                       onClick={() => removeFromCart(cartItems.findIndex(i => i.id === item.id))}
                     />
                     <span>{item.quantity}</span>
                     <img
-                      src="/images/addition.png"  // addition button
+                      src="src/assets/addition.png"  // addition button
                       alt="plus"
                       className="quantity-button-plus"
                       onClick={() => addToCart(item)}

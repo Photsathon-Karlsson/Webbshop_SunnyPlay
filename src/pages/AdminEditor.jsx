@@ -186,11 +186,11 @@ const AdminEditor = () => {
                     </p>
                     {/* Button remove with trash icon */}
                     <button onClick={() => handleDeleteProduct(product.id)}>
-                      <img src="/images/trash-can.png" alt="Remove" />
+                      <img src="src/assets/trash-can.png" alt="Remove" />
                     </button>
                     {/* Button edit with pen icon */}
                     <button onClick={() => handleEditProduct(index)}>
-                      <img src="/images/pen.png" alt="Edit" />
+                      <img src="src/assets/pen.png" alt="Edit" />
                     </button>
                   </div>
                 ))}
