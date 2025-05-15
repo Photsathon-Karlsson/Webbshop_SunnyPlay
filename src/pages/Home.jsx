@@ -1,5 +1,4 @@
-// src/pages/Home.jsx
-// Show the list of toys from Firebase and have an “Add to Cart” button that adds the item to context using
+// Show the list of toys from Firebase and have an “Add to Cart” button that adds the item to context using.
 
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
@@ -7,10 +6,10 @@ import { db } from "../data/database";
 import useCart from "../components/useCart";
 
 const Home = () => {
-  const [toys, setToys] = useState([]); // List of toys from Firebase
-  const [searchQuery, setSearchQuery] = useState(""); // User search value
-  const [sortOption, setSortOption] = useState(""); // Default empty to allow "-- Sort By --"
-  const { addToCart } = useCart(); // Cart context (we removed cartItems since it's unused)
+  const [toys, setToys] = useState([]); // List of toys from Firebase.
+  const [searchQuery, setSearchQuery] = useState(""); // User search value.
+  const [sortOption, setSortOption] = useState(""); // Default empty to allow "-- Sort By --".
+  const { addToCart } = useCart(); // Cart context. 
 
   // Fetch toys from Firebase on load
   useEffect(() => {
@@ -26,22 +25,26 @@ const Home = () => {
     fetchToys();
   }, []);
 
-  // Function for searching
+  // Function for searching.
+  // Updates the searchQuery state with the search box input to filter results.
+  // e (event) & (an object when a user types in a search box).
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Function for sorting
+  // Function Sorting.
+  // Stores the user's sorting choice and sorts the toys.
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
-
-  // Filter toys based on search input
+  // Filter toys based on search input.
+  // Select toys with names that match the user's input, ignoring case.
+  // The `?.` symbol prevents an error if the toy doesn't have a name (`name`).
   const filteredToys = toys.filter((toy) =>
     toy.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  // Sort filtered toys
+  // Sort filtered toys.
+  // Sorts the filtered toys based on the selected sort option.
   const sortedToys = filteredToys.sort((a, b) => {
     switch (sortOption) {
       case "name-asc":
@@ -57,7 +60,8 @@ const Home = () => {
     }
   });
 
-  // Add item to cart
+  // Add item to cart.
+  // This function takes one parameter(toy): a toy object to add.
   const handleAddToCart = (toy) => {
     addToCart(toy);
   };

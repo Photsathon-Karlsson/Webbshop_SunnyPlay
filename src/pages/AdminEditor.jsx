@@ -1,4 +1,3 @@
-// src/pages/AdminEditor.jsx
 // Admin can edit, remove, add items.
 
 import { useEffect, useState } from "react";
@@ -8,10 +7,10 @@ import { db } from "../data/database";
 // Get info from firestore collection 'toys'.
 // Keep info in state 'products'
 
-// useState
+// UseState - a Hook that lets you manage data (state) inside a component to store all products (products) & Store the new product being added (newProduct).
 const AdminEditor = () => {
-  const [products, setProducts] = useState([]);
-  // Create state for input info.
+  const [products, setProducts] = useState([]); // Creates a state products (starts empty). & Use setProducts to update it.
+  // Create state for input info. This line sets up `newProduct` to hold new item info from the form.
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
@@ -31,10 +30,12 @@ const AdminEditor = () => {
     setSortOption(e.target.value);
   };
 
-  // Function to edit & save product.
+  // Function to edit 
+  // editIndex = which product to edit / fetchProducts = get all products from Firebase / Run fetchProducts when the page opens
+  // 'editIndex' shows which item is being edited. 'null' means no edit. Use 'setEditIndex' to update it.
   const [editIndex, setEditIndex] = useState(null);
-
   // Function fetchProducts for upload item list.
+  // This gets toy data from Firebase. It reads all items in the "toys" collection, turns them into objects with their IDs & saves them to the product list.
   const fetchProducts = async () => {
     const snapshot = await getDocs(collection(db, "toys"));
     const list = snapshot.docs.map((doc) => ({
@@ -43,54 +44,57 @@ const AdminEditor = () => {
     }));
     setProducts(list);
   };
-
-  // Create fetchProducts when loading.
+  // Create fetchProducts when loading. Use useEffect([]) to run fetchProducts() one time when the page loads.
   useEffect(() => {
     fetchProducts();
   }, []);
 
   // Function to add product item.
+  // Create an async function called handleAddProduct to add products to the database.
   const handleAddProduct = async () => {
+    // If name/price/image is missing, show a warning: 'Please fill in all information.' & stop the function.
     if (!newProduct.name || !newProduct.price || !newProduct.image) {
       alert("Please fill in all information.");
       return;
     }
     console.log("Adding product:", newProduct); // Check if added product.
+    // Use addDoc to add newProduct to the "toys" collection. Change the price to a number with Number(newProduct.price).
     await addDoc(collection(db, "toys"), {
       ...newProduct,
       price: Number(newProduct.price),
     });
-
+    // Clear form data, resetting all values to blank.
     setNewProduct({ name: "", description: "", price: "", image: "" });
     fetchProducts(); // Load new list.
   };
 
   // Function to remove product item.
-  const handleDeleteProduct = async (id) => {
-    await deleteDoc(doc(db, "toys", id));
+  const handleDeleteProduct = async (id) => { // Define an async function handleDeleteProduct(id) to delete a product by its ID using await.
+    await deleteDoc(doc(db, "toys", id)); // Use deleteDoc(doc(db, "toys", id)).
     console.log("Deleted product with ID:", id); // Check if removed product.
     fetchProducts(); // Load new info after remove.
   };
 
   // Function to edit product item.
-  const handleEditProduct = (index) => {
-    setEditIndex(index);
-    setNewProduct(products[index]); // Enter the selected values in the form.
-    console.log("Editing product:", products[index]); // 🔍
+  const handleEditProduct = (index) => { // index: the position of the clicked product.
+    setEditIndex(index); // Marks which product is being edited.
+    setNewProduct(products[index]); // Loads the selected product’s data into the form.
+    console.log("Editing product:", products[index]);//🔍
   };
 
   // Function for recording product edits when the user clicks the “Edit” button and changes data in the form.
-  const handleSaveProduct = async () => {
-    const editingProduct = products[editIndex];
-    const productRef = doc(db, "toys", editingProduct.id);
+  const handleSaveProduct = async () => { // Create an async function named handleSaveProduct & can use await inside it.
+    const editingProduct = products[editIndex]; // Gets the product to edit from the products array using editIndex.
+    const productRef = doc(db, "toys", editingProduct.id); // Reference the 'toys' document by editingProduct.id. 
+    // Update Firestore with newProduct data, converting price to a number using Number(newProduct.price) before saving.
     await updateDoc(productRef, {
       ...newProduct,
       price: Number(newProduct.price),
     });
-    console.log("Updated product:", editingProduct.id);
-    setEditIndex(null);
-    setNewProduct({ name: "", description: "", price: "", image: "" });
-    fetchProducts();
+    console.log("Updated product:", editingProduct.id); // Check if uploaded product.
+    setEditIndex(null); // Set editIndex to null to stop editing any item.
+    setNewProduct({ name: "", description: "", price: "", image: "" }); // Clear the newProduct form for the next add or edit.
+    fetchProducts(); // Using fetchProducts() to reload updated products.
   };
 
   return (

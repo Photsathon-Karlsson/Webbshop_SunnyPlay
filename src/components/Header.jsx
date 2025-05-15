@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // ✅ เพิ่มเพื่อใช้ <Link>
+import { Link } from "react-router-dom"; 
 import useCart from "../components/useCart";
 
 const Header = () => {
@@ -7,14 +7,14 @@ const Header = () => {
   return (
     <header className="home-header">
       <div className="top-nav">
-        {/* ปุ่มแอดมิน */}
+        {/* Admin button */}
         <div className="admin-button">
           <a href="/login">
             <img src="/images/employee.png" alt="Admin" className="nav-icon" />
           </a>
         </div>
 
-        {/* ปุ่มตะกร้า */}
+        {/* Cart button */}
         <div className="cart-button">
           <div className="cart-icon-wrapper">
             <Link to="/cart">
@@ -27,7 +27,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* โลโก้และข้อความ */}
+      {/* Logo & title */}
       <div className="logo-title">
         <a href="/">
           <img src="/images/logo.png" alt="Sunny Play Logo" className="logo" />

@@ -2,11 +2,15 @@
 import { useState } from "react";
 import useCart from "../components/useCart";
 
+// Declares a Cart component.
 const Cart = () => {
+  // Use the useCart() hook to access cart data and functions from the Cart Context. 
+  // (cartItems: array of products in the cart / addToCart: adds a product to the cart / removeFromCart: removes a product from the cart / clearCart: empties the cart).
   const { cartItems, removeFromCart, addToCart, clearCart } = useCart();
-  const [isCheckedOut, setIsCheckedOut] = useState(false);
-  const [receipt, setReceipt] = useState({ items: [], total: 0 });
-
+  const [isCheckedOut, setIsCheckedOut] = useState(false); // Create a state isCheckedOut to track if checked out; set initial value to false.
+  const [receipt, setReceipt] = useState({ items: [], total: 0 }); // Stores receipt state with: items: list of items & total: total amount.
+  // Cart Items.
+  // Use .reduce() to group the same products: If the product is already in the list, add 1 to its quantity. / If not, add it with quantity: 1.
   const groupedItems = cartItems.reduce((acc, item) => {
     const existingItem = acc.find(i => i.id === item.id);
     if (existingItem) {
@@ -17,14 +21,16 @@ const Cart = () => {
     return acc;
   }, []);
 
+  // Using reduce() adds up the total cost of all items in the cart.
+  // It multiplies each item’s price by how many there are, & saves the total in totalPrice.
   const totalPrice = groupedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
+  // handleCheckout runs when the user clicks to complete their purchase(checkout).
   const handleCheckout = () => {
-    const receiptItems = groupedItems.map(item => ({ ...item }));
-    const receiptTotal = totalPrice;
-    setReceipt({ items: receiptItems, total: receiptTotal });
-    setIsCheckedOut(true);
-    clearCart();
+    const receiptItems = groupedItems.map(item => ({ ...item })); // Use .map() with ...item to copy groupedItems into receiptItems.
+    const receiptTotal = totalPrice; // Set the total price (receiptTotal) using the value from totalPrice.
+    setReceipt({ items: receiptItems, total: receiptTotal }); // Save receipt (item list + total price) with setReceipt.
+    setIsCheckedOut(true); // Set the status as paid (isCheckedOut is true)
+    clearCart(); // Clear shopping cart (reset to empty).
   };
 
   return (
