@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createHashRouter, RouterProvider } from "react-router-dom"; // ✅ เปลี่ยนตรงนี้
+import { createHashRouter, RouterProvider } from "react-router-dom"; 
 
 import "./index.css";
 
@@ -10,7 +10,7 @@ import Cart from "./pages/Cart.jsx";
 import Login from "./pages/Login.jsx";
 import AdminEditor from "./pages/AdminEditor.jsx";
 
-// ใช้ HashRouter แทน BrowserRouter
+// Use HashRouter instead of BrowserRouter
 const router = createHashRouter([
   {
     path: "/",
