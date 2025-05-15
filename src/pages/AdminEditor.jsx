@@ -103,7 +103,6 @@ const AdminEditor = () => {
       <h1>Admin Editor</h1>
       {/* Subheading */}
       <p className="subheading">Manage Products: Add, edit, or delete products in your store.</p>
-
       {/* Layout divided in two columns */}
       <div className="editor-layout">
         {/* Left column: search, sort, add product */}

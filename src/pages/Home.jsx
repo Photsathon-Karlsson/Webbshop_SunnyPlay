@@ -64,6 +64,7 @@ const Home = () => {
   // This function takes one parameter(toy): a toy object to add.
   const handleAddToCart = (toy) => {
     addToCart(toy);
+    console.log(`Added to cart: ${toy.name}`);
   };
 
   return (

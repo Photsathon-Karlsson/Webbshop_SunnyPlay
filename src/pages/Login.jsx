@@ -14,6 +14,8 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
+    console.log("Login attempt:", { username, password });
+
     // Check username & password.
     // This code checks if the entered username and password match the set values.
     // If not matched, setError() shows "Username or password is incorrect.

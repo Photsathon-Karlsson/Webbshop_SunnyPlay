@@ -1,5 +1,5 @@
 // Show items in cart + total price with quantity, checkout button, and receipt
-import { useState } from "react";
+import { useState} from "react";
 import useCart from "../components/useCart";
 
 // Declares a Cart component.
@@ -20,6 +20,7 @@ const Cart = () => {
     }
     return acc;
   }, []);
+  console.log("Total items in cart:", groupedItems.reduce((sum, item) => sum + item.quantity, 0));
 
   // Using reduce() adds up the total cost of all items in the cart.
   // It multiplies each item’s price by how many there are, & saves the total in totalPrice.
