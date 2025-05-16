@@ -1,37 +1,38 @@
 // Show items in cart + total price with quantity, checkout button, and receipt
-import { useState} from "react";
-import useCart from "../components/useCart";
+import { useState } from "react";
+import useCartStore from "../store/cartStore"; // Import Zustand store
 
-// Declares a Cart component.
+// Declares a Cart component
 const Cart = () => {
-  // Use the useCart() hook to access cart data and functions from the Cart Context. 
-  // (cartItems: array of products in the cart / addToCart: adds a product to the cart / removeFromCart: removes a product from the cart / clearCart: empties the cart).
-  const { cartItems, removeFromCart, addToCart, clearCart } = useCart();
-  const [isCheckedOut, setIsCheckedOut] = useState(false); // Create a state isCheckedOut to track if checked out; set initial value to false.
-  const [receipt, setReceipt] = useState({ items: [], total: 0 }); // Stores receipt state with: items: list of items & total: total amount.
-  // Cart Items.
-  // Use .reduce() to group the same products: If the product is already in the list, add 1 to its quantity. / If not, add it with quantity: 1.
-  const groupedItems = cartItems.reduce((acc, item) => {
-    const existingItem = acc.find(i => i.id === item.id);
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      acc.push({ ...item, quantity: 1 });
-    }
-    return acc;
-  }, []);
-  console.log("Total items in cart:", groupedItems.reduce((sum, item) => sum + item.quantity, 0));
+  // Access cart state and actions from Zustand store
+  const cart = useCartStore((state) => state.cart); // Current list of cart items with quantity
+  const addToCart = useCartStore((state) => state.addToCart); // Function to increase quantity or add item
+  const decreaseFromCart = useCartStore((state) => state.decreaseFromCart); // Function to decrease quantity or remove item
+  const clearCart = useCartStore((state) => state.clearCart); // Function to clear all items from cart
 
-  // Using reduce() adds up the total cost of all items in the cart.
-  // It multiplies each item’s price by how many there are, & saves the total in totalPrice.
-  const totalPrice = groupedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  // handleCheckout runs when the user clicks to complete their purchase(checkout).
+  const [isCheckedOut, setIsCheckedOut] = useState(false); // Tracks checkout status
+  const [receipt, setReceipt] = useState({ items: [], total: 0 }); // Stores receipt (items and total price)
+
+  // No need to group manually anymore — Zustand cart already includes quantity
+  const groupedItems = cart;
+
+  // Calculate total price by multiplying price × quantity for each item
+  const totalPrice = groupedItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // When the user clicks the checkout button:
+  // 1. Copy cart items to receipt
+  // 2. Save the total price
+  // 3. Set checkout status to true
+  // 4. Clear the cart
   const handleCheckout = () => {
-    const receiptItems = groupedItems.map(item => ({ ...item })); // Use .map() with ...item to copy groupedItems into receiptItems.
-    const receiptTotal = totalPrice; // Set the total price (receiptTotal) using the value from totalPrice.
-    setReceipt({ items: receiptItems, total: receiptTotal }); // Save receipt (item list + total price) with setReceipt.
-    setIsCheckedOut(true); // Set the status as paid (isCheckedOut is true)
-    clearCart(); // Clear shopping cart (reset to empty).
+    const receiptItems = groupedItems.map((item) => ({ ...item }));
+    const receiptTotal = totalPrice;
+    setReceipt({ items: receiptItems, total: receiptTotal });
+    setIsCheckedOut(true);
+    clearCart();
   };
 
   return (
@@ -39,6 +40,7 @@ const Cart = () => {
       <h1>Your Shopping Cart</h1>
 
       {isCheckedOut ? (
+        // Show receipt after checkout
         <section className="receipt">
           <h2 className="receipt-title">Receipt</h2>
           <ul className="receipt-list">
@@ -52,9 +54,11 @@ const Cart = () => {
           <p className="receipt-thankyou">Thank you for your purchase!</p>
         </section>
       ) : groupedItems.length === 0 ? (
+        // If cart is empty, show message
         <p>Your cart is empty.</p>
       ) : (
         <>
+          {/* Show items in the cart */}
           <ul className="cart-list">
             {groupedItems.map((item) => (
               <li key={item.id} className="cart-item">
@@ -64,25 +68,27 @@ const Cart = () => {
                   <p>{item.description}</p>
                   <p>Price: {item.price} kr</p>
                   <div className="cart-actions">
-                    {/* Use images for + and - buttons */}
+                    {/* Quantity buttons */}
                     <img
-                      src="src/assets/minus.png"  // minus button
+                      src="src/assets/minus.png"
                       alt="minus"
                       className="quantity-button-minus"
-                      onClick={() => removeFromCart(cartItems.findIndex(i => i.id === item.id))}
+                      onClick={() => decreaseFromCart(item.id)} // Decrease quantity by 1 (or remove if quantity = 1)
                     />
                     <span>{item.quantity}</span>
                     <img
-                      src="src/assets/addition.png"  // addition button
+                      src="src/assets/addition.png"
                       alt="plus"
                       className="quantity-button-plus"
-                      onClick={() => addToCart(item)}
+                      onClick={() => addToCart(item)} // Increase quantity by 1
                     />
                   </div>
                 </div>
               </li>
             ))}
           </ul>
+
+          {/* Show total and checkout button */}
           <h2>Total: {totalPrice} kr</h2>
           <button className="checkout-button" onClick={handleCheckout}>
             Checkout
@@ -94,4 +100,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

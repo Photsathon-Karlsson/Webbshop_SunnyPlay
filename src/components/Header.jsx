@@ -1,20 +1,23 @@
 import { Link } from "react-router-dom";
-import useCart from "../components/useCart";
+import useCartStore from "../store/cartStore";
 
-// Import img.
+// Import images
 import logo from "../assets/logo.png";
 import cartIcon from "../assets/cart.png";
 import adminIcon from "../assets/employee.png";
 
 const Header = () => {
-  const { cartItems } = useCart();
+  // Select only what you need to display total item count
+  const totalItems = useCartStore((state) =>
+    state.cart.reduce((sum, item) => sum + item.quantity, 0)
+  );
 
   return (
     <header className="home-header">
       <div className="top-nav">
         {/* Admin button */}
         <div className="admin-button">
-          <a href="/#/login"> {/* Use hash route for GitHub Pages */}
+          <a href="/#/login">
             <img src={adminIcon} alt="Admin" className="nav-icon" />
           </a>
         </div>
@@ -24,8 +27,8 @@ const Header = () => {
           <div className="cart-icon-wrapper">
             <Link to="/cart">
               <img src={cartIcon} alt="Cart" className="nav-icon" />
-              {cartItems.length > 0 && (
-                <span className="cart-count">{cartItems.length}</span>
+              {totalItems > 0 && (
+                <span className="cart-count">{totalItems}</span>
               )}
             </Link>
           </div>
@@ -34,7 +37,7 @@ const Header = () => {
 
       {/* Logo & title */}
       <div className="logo-title">
-        <a href="/#/"> {/* Use hash route */}
+        <a href="/#/">
           <img src={logo} alt="Sunny Play Logo" className="logo" />
         </a>
         <h1>Welcome to Sunny Play!</h1>

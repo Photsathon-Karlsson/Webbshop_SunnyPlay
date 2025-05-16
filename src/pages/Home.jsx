@@ -1,15 +1,16 @@
-// Show the list of toys from Firebase and have an “Add to Cart” button that adds the item to context using.
+// Show the list of toys from Firebase and have an “Add to Cart” button that adds the item using Zustand.
 
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/database";
-import useCart from "../components/useCart";
+import useCartStore from "../store/cartStore"; // ✅ Use Zustand store
 
 const Home = () => {
   const [toys, setToys] = useState([]); // List of toys from Firebase.
   const [searchQuery, setSearchQuery] = useState(""); // User search value.
   const [sortOption, setSortOption] = useState(""); // Default empty to allow "-- Sort By --".
-  const { addToCart } = useCart(); // Cart context. 
+
+  const addToCart = useCartStore((state) => state.addToCart); // ✅ Get addToCart function from Zustand
 
   // Fetch toys from Firebase on load
   useEffect(() => {
@@ -26,25 +27,21 @@ const Home = () => {
   }, []);
 
   // Function for searching.
-  // Updates the searchQuery state with the search box input to filter results.
-  // e (event) & (an object when a user types in a search box).
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Function Sorting.
-  // Stores the user's sorting choice and sorts the toys.
+  // Function for sorting.
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
+
   // Filter toys based on search input.
-  // Select toys with names that match the user's input, ignoring case.
-  // The `?.` symbol prevents an error if the toy doesn't have a name (`name`).
   const filteredToys = toys.filter((toy) =>
     toy.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  // Sort filtered toys.
-  // Sorts the filtered toys based on the selected sort option.
+
+  // Sort filtered toys based on selected option.
   const sortedToys = filteredToys.sort((a, b) => {
     switch (sortOption) {
       case "name-asc":
@@ -60,8 +57,7 @@ const Home = () => {
     }
   });
 
-  // Add item to cart.
-  // This function takes one parameter(toy): a toy object to add.
+  // Add item to cart using Zustand.
   const handleAddToCart = (toy) => {
     addToCart(toy);
     console.log(`Added to cart: ${toy.name}`);
@@ -113,7 +109,7 @@ const Home = () => {
             <p>{toy.description}</p>
             <p>Price: {toy.price} kr</p>
 
-            {/* Add to cart button */}
+            {/* Add to cart button using Zustand */}
             <button
               className="add-to-cart"
               onClick={() => handleAddToCart(toy)}
