@@ -2,7 +2,7 @@
   "name": "webbshop",
   "private": true,
   "version": "0.0.0",
-  "proxy": "https://photsathon-karlsson.github.io/Webbshop_SunnyPlay/:5000",
+  "proxy": "/api" : "*",
   "type": "module",
   "homepage": "https://photsathon-karlsson.github.io/Webbshop_SunnyPlay/",
   "scripts": {
