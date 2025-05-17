@@ -17,9 +17,9 @@ const Header = () => {
       <div className="top-nav">
         {/* Admin button */}
         <div className="admin-button">
-          <a href="/#/login">
+          <Link to="/login">
             <img src={adminIcon} alt="Admin" className="nav-icon" />
-          </a>
+          </Link>
         </div>
 
         {/* Cart button */}
@@ -37,9 +37,9 @@ const Header = () => {
 
       {/* Logo & title */}
       <div className="logo-title">
-        <a href="/#/">
+        <Link href="#">
           <img src={logo} alt="Sunny Play Logo" className="logo" />
-        </a>
+        </Link>
         <h1>Welcome to Sunny Play!</h1>
       </div>
     </header>
