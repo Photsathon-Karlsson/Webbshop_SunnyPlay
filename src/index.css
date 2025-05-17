@@ -240,7 +240,7 @@ body, html {
 .cart-container {
   padding: 2rem;
   max-width: 800px;
-  margin: 100px auto 0 auto; /* ✅ เพิ่ม margin-top สำหรับเว้น header */
+  margin: 100px auto 0 auto; 
   text-align: center;
   box-sizing: border-box;
 }
@@ -282,8 +282,26 @@ body, html {
 
 .quantity-button-minus,
 .quantity-button-plus {
-  width: 25px;
-  height: 25px;
+  font-size: 1.5rem;               
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FF865E;      
+  color: white;                   
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  display: flex;                   
+  align-items: center;            
+  justify-content: center;        
+  padding: 0;                      
+}
+
+.quantity-button-minus:hover,
+.quantity-button-plus:hover {
+  background-color: #FEE440;
+  color: black;
 }
 
 .checkout-button {
@@ -340,7 +358,6 @@ body, html {
 }
 
 .receipt-total {
-  background: #fee440;
   color: black;
   font-weight: bold;
   font-size: 1.25rem;
@@ -365,6 +382,7 @@ body, html {
     width: 100%;
   }
 }
+
 
 /* -------------------- Login Page -------------------- */
 .main-container {
