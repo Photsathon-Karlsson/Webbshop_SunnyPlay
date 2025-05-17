@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../data/database";
-import useCartStore from "../store/cartStore"; // ✅ Use Zustand store
+import useCartStore from "../store/cartStore"; // Use Zustand store
 
 const Home = () => {
   const [toys, setToys] = useState([]); // List of toys from Firebase.
   const [searchQuery, setSearchQuery] = useState(""); // User search value.
   const [sortOption, setSortOption] = useState(""); // Default empty to allow "-- Sort By --".
 
-  const addToCart = useCartStore((state) => state.addToCart); // ✅ Get addToCart function from Zustand
+  const addToCart = useCartStore((state) => state.addToCart); // Get addToCart function from Zustand
 
   // Fetch toys from Firebase on load
   useEffect(() => {
