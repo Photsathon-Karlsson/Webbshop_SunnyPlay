@@ -1,6 +1,8 @@
 // Show items in cart + total price with quantity, checkout button, and receipt
 import { useState } from "react";
-import useCartStore from "../store/cartStore"; // Import Zustand store
+import useCartStore from "../store/cartStore"; 
+import minusIcon from "../assets/minus.png";
+import additionIcon from "../assets/addition.png";
 
 // Declares a Cart component
 const Cart = () => {
@@ -70,14 +72,14 @@ const Cart = () => {
                   <div className="cart-actions">
                     {/* Quantity buttons */}
                     <img
-                      src="src/assets/minus.png"
+                      src={minusIcon}
                       alt="minus"
                       className="quantity-button-minus"
                       onClick={() => decreaseFromCart(item.id)} // Decrease quantity by 1 (or remove if quantity = 1)
                     />
                     <span>{item.quantity}</span>
                     <img
-                      src="src/assets/addition.png"
+                      src={additionIcon}
                       alt="plus"
                       className="quantity-button-plus"
                       onClick={() => addToCart(item)} // Increase quantity by 1
