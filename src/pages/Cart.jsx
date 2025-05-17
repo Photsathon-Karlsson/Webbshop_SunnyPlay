@@ -1,8 +1,6 @@
 // Show items in cart + total price with quantity, checkout button, and receipt
 import { useState } from "react";
 import useCartStore from "../store/cartStore"; 
-// import minusIcon from "../assets/minus.png"; // removed: no longer using image icon
-// import additionIcon from "../assets/addition.png"; // removed: no longer using image icon
 
 // Declares a Cart component
 const Cart = () => {

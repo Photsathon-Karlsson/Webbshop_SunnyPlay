@@ -76,5 +76,4 @@ const useCartStore = create((set) => ({
   },
 }));
 
-// Export the store so it can be used in components
 export default useCartStore;
