@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../data/database";
+import IconTrashCan from '../assets/trash-can.png'
+import IconPen from '../assets/pen.png'
 
 // Get info from firestore collection 'toys'.
 // Keep info in state 'products'
@@ -185,11 +187,11 @@ const AdminEditor = () => {
                     </p>
                     {/* Button remove with trash icon */}
                     <button onClick={() => handleDeleteProduct(product.id)}>
-                      <img src="src/assets/trash-can.png" alt="Remove" />
+                      <img src={IconTrashCan} alt="Remove" />
                     </button>
                     {/* Button edit with pen icon */}
                     <button onClick={() => handleEditProduct(product.id)}>
-                      <img src="src/assets/pen.png" alt="Edit" />
+                      <img src={IconPen} alt="Edit" />
                     </button>
                   </div>
                 ))}
