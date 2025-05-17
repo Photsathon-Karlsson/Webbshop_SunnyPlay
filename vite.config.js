@@ -3,7 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
    plugins: [react()],
-   base: '/Webbshop_SunnyPlay/'  
+   base: '/Webbshop_SunnyPlay/'  ,
+      server: {
+    open: true,
+    port: 3001,
+  },
 })
 
 
