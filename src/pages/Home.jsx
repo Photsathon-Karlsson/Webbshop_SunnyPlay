@@ -102,22 +102,31 @@ const Home = () => {
 
       {/* Grid of toy cards */}
       <section className="toys-grid">
-        {sortedToys.map((toy) => (
-          <div className="toy-card" key={toy.id}>
-            <img src={toy.image} alt={toy.alt || toy.name} className="toy-image" />
-            <h2>{toy.name}</h2>
-            <p>{toy.description}</p>
-            <p>Price: {toy.price} kr</p>
+        {sortedToys.length === 0 ? (
+          // Show message if cannot found product.
+          <p className="no-result-text">No product found</p>
+        ) : (
+          sortedToys.map((toy) => (
+            <div className="toy-card" key={toy.id}>
+              <img
+                src={toy.image}
+                alt={toy.alt || toy.name}
+                className="toy-image"
+              />
+              <h2>{toy.name}</h2>
+              <p>{toy.description}</p>
+              <p>Price: {toy.price} kr</p>
 
-            {/* Add to cart button using Zustand */}
-            <button
-              className="add-to-cart"
-              onClick={() => handleAddToCart(toy)}
-            >
-              Add to Cart
-            </button>
-          </div>
-        ))}
+              {/* Add to cart button using Zustand */}
+              <button
+                className="add-to-cart"
+                onClick={() => handleAddToCart(toy)}
+              >
+                Add to Cart
+              </button>
+            </div>
+          ))
+        )}
       </section>
     </main>
   );

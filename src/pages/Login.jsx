@@ -19,7 +19,7 @@ const Login = () => {
     // Check username & password.
     // This code checks if the entered username and password match the set values.
     // If not matched, setError() shows "Username or password is incorrect.
-    if (username === "admin" && password === "1234") {
+    if (username === "admin" && password === "password") {
       navigate("/admin");
     } else {
       setError("Username or password is incorrect");
