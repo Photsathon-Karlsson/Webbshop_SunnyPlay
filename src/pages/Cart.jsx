@@ -37,7 +37,7 @@ const Cart = () => {
 
   return (
     <main className="cart-container">
-      <h1>Your Shopping Cart</h1>
+      <h1 className="cart-title">Your Shopping Cart</h1>
 
       {isCheckedOut ? (
         // Show receipt after checkout
@@ -75,7 +75,7 @@ const Cart = () => {
                     >
                       – {/* changed: replaced icon with text */}
                     </button>
-                    <span>{item.quantity}</span>
+                    <span className="quantity-number">{item.quantity}</span>
                     <button
                       className="quantity-button-plus"
                       onClick={() => addToCart(item)} // Increase quantity by 1
