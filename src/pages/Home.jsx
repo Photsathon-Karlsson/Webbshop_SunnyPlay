@@ -108,11 +108,16 @@ const Home = () => {
         ) : (
           sortedToys.map((toy) => (
             <div className="toy-card" key={toy.id}>
-              <img
-                src={toy.image}
-                alt={toy.alt || toy.name}
-                className="toy-image"
-              />
+              {/* Check if image exists and is not empty */}
+              {toy.image && toy.image.trim() !== "" ? (
+                <img
+                  src={toy.image}
+                  alt={toy.alt || toy.name}
+                  className="toy-image"
+                />
+              ) : (
+                <div className="no-image">No image available</div>
+              )}
               <h2>{toy.name}</h2>
               <p>{toy.description}</p>
               <p>Price: {toy.price} kr</p>

@@ -52,14 +52,27 @@ const AdminEditor = () => {
   const validateField = (field, value) => {
     switch (field) {
       case "name":
-      case "description":
+        // เพิ่มเงื่อนไขความยาวต้องอย่างน้อย 5 ตัวอักษร และต้องเป็นตัวอักษรเท่านั้น
         if (!/^[A-Za-zÅÄÖåäö\s]*$/.test(value)) {
           return "Only letters are allowed.";
         }
+        if (value.trim().length < 5) {
+          return "Name must be at least 5 characters.";
+        }
+        break;
+      case "description":
+        // ต้องไม่ปล่อยว่าง
+        if (!value.trim()) {
+          return "Description is required.";
+        }
         break;
       case "price":
-        if (!/^\d*(\.\d{0,2})?$/.test(value)) {
-          return "Only numeric values are allowed.";
+        // ต้องเป็นจำนวนเต็มและมากกว่า 0
+        if (!/^\d+$/.test(value)) {
+          return "Price must be a whole number.";
+        }
+        if (parseInt(value) <= 0) {
+          return "Price must be greater than 0.";
         }
         break;
       case "image":
@@ -177,7 +190,7 @@ const AdminEditor = () => {
               value={newProduct.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
             />
-            <small className="helper-text">Enter product name using letters only.</small>
+            <small className="helper-text">Enter product name using at least 5 letters.</small>
             {errors.name === "" && newProduct.name && <p className="success-message">✔️ Passed!</p>}
             {errors.name && <p className="error-message">{errors.name}</p>}
 
@@ -187,7 +200,7 @@ const AdminEditor = () => {
               value={newProduct.description}
               onChange={(e) => handleInputChange("description", e.target.value)}
             />
-            <small className="helper-text">Enter product description using letters only.</small>
+            <small className="helper-text">Description is required.</small>
             {errors.description === "" && newProduct.description && <p className="success-message">✔️ Passed!</p>}
             {errors.description && <p className="error-message">{errors.description}</p>}
 
@@ -197,7 +210,7 @@ const AdminEditor = () => {
               value={newProduct.price}
               onChange={(e) => handleInputChange("price", e.target.value)}
             />
-            <small className="helper-text">Enter product price using numbers only.</small>
+            <small className="helper-text">Enter whole number greater than 0.</small>
             {errors.price === "" && newProduct.price && <p className="success-message">✔️ Passed!</p>}
             {errors.price && <p className="error-message">{errors.price}</p>}
 
@@ -207,7 +220,7 @@ const AdminEditor = () => {
               value={newProduct.image}
               onChange={(e) => handleInputChange("image", e.target.value)}
             />
-            <small className="helper-text">Enter image URL (.jpg, .jpeg, or .png)</small>
+            <small className="helper-text">Enter image URL (.jpg, .jpeg, .png, .gif, .webp)</small>
             {errors.image === "" && newProduct.image && <p className="success-message">✔️ Passed!</p>}
             {errors.image && <p className="error-message">{errors.image}</p>}
 
